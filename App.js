@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useState }from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,8 +15,13 @@ import {
   Text,
   StatusBar,
   TextInput,
-  Button,
+  
 } from 'react-native';
+
+import { 
+  CheckBox,
+  Button
+} from 'react-native-elements'
 
 import {
   Header,
@@ -27,33 +32,23 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 const App: () => React$Node = () => {
+
+  const[checked, unchecked] = useState(true)
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
           <View style={styles.body}>
-            <View>
-              <Text>Welcome Home</Text>
-              <Text>We always have a cup of hot coffee and a warm blanket</Text>
-              <View>
+              <Text style={styles.textWelcome}>Welcome home</Text>
+              <Text style={styles.description}>We always have a cup of hot coffee and a warm blanket</Text>
+              <View style={styles.inputContainer}>
                 <TextInput placeholder='Your name'/>
                 <TextInput placeholder='Your role'/>
-                <Text>(checkbox) I'm okay with Term of Service</Text>
+                <CheckBox center title='Agree with Term of Services' checked={checked}/>
               </View>
-              <Button title='Sign Up'/>
-            </View>
-
+              <Button title='Sign Up' type='clear' raised style={styles.button}/>
           </View>
-        </ScrollView>
       </SafeAreaView>
     </>
   );
@@ -63,39 +58,28 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
+  textWelcome: {
+    marginTop: 100,
+    fontSize: 30,
+    fontWeight: 'bold',
+    alignSelf:'center'
   },
   body: {
     backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
     paddingHorizontal: 24,
+
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
+  inputContainer: {
+    marginTop: 32,
   },
-  sectionDescription: {
+  description: {
     marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
+    fontSize: 15,
+    alignSelf:'center'
   },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+  button:{
+    backgroundColor:'coral'
+  }
 });
 
 export default App;
