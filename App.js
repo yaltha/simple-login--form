@@ -15,6 +15,9 @@ import {
   Text,
   StatusBar,
   TextInput,
+  Image,
+  TouchableWithoutFeedback,
+  Keyboard,
   
 } from 'react-native';
 
@@ -33,52 +36,81 @@ import {
 
 const App: () => React$Node = () => {
 
-  const[checked, unchecked] = useState(true)
+  const[checked, unchecked] = useState(false)
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      {/* <StatusBar barStyle="dark-content" /> */}
       <SafeAreaView>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.body}>
+              <Image 
+                source={require('./android/app/src/main/res/welcome/leaves.png')} 
+                style={{width:200,height:200, alignSelf:'center'}}/>
               <Text style={styles.textWelcome}>Welcome home</Text>
               <Text style={styles.description}>We always have a cup of hot coffee and a warm blanket</Text>
-              <View style={styles.inputContainer}>
-                <TextInput placeholder='Your name'/>
-                <TextInput placeholder='Your role'/>
-                <CheckBox center title='Agree with Term of Services' checked={checked}/>
-              </View>
-              <Button title='Sign Up' type='clear' raised style={styles.button}/>
+                <View style={styles.inputContainer}>
+                  <TextInput 
+                    style={styles.input} 
+                    placeholder='Your name'/>
+                  <TextInput 
+                    style={styles.input} 
+                    placeholder='Your role'/>
+                </View>
+              <CheckBox 
+                  center 
+                  title="I'm okay with Term of Services" 
+                  containerStyle={{ backgroundColor: "transparent", borderWidth: 0 }}
+                  checked={checked} 
+                  onPress={()=> unchecked(true)}
+                  size={10}
+                  // checkedColor="red"
+                  />
+              <Button 
+                  raised title='Sign Up' 
+                  type='clear' 
+                  buttonStyle={styles.button} 
+                  titleStyle={{color:'#fff'}}/>
           </View>
+        </TouchableWithoutFeedback>
       </SafeAreaView>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
   textWelcome: {
-    marginTop: 100,
     fontSize: 30,
     fontWeight: 'bold',
     alignSelf:'center'
+
+  },
+  description: {
+    marginTop: 8,
+    fontSize: 15,
+    textAlign: 'center'
+
   },
   body: {
+    paddingTop: 40,
     backgroundColor: Colors.white,
-    paddingHorizontal: 24,
+    paddingHorizontal: 50,
 
   },
   inputContainer: {
     marginTop: 32,
   },
-  description: {
-    marginTop: 8,
+  input:{
+    margin: 5,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    padding: 10,
     fontSize: 15,
-    alignSelf:'center'
+    borderRadius: 6,
   },
   button:{
-    backgroundColor:'coral'
+    backgroundColor:'#ff9f43',
+    
   }
 });
 
