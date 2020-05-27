@@ -18,11 +18,11 @@ import {
   Image,
   TouchableWithoutFeedback,
   Keyboard,
-  
+  CheckBox
 } from 'react-native';
 
 import { 
-  CheckBox,
+  // CheckBox,
   Button
 } from 'react-native-elements'
 
@@ -57,15 +57,14 @@ const App: () => React$Node = () => {
                     style={styles.input} 
                     placeholder='Your role'/>
                 </View>
-              <CheckBox 
-                  center 
-                  title="I'm okay with Term of Services" 
-                  containerStyle={{ backgroundColor: "transparent", borderWidth: 0 }}
-                  checked={checked} 
-                  onPress={()=> unchecked(true)}
-                  size={10}
-                  // checkedColor="red"
-                  />
+              <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                <CheckBox 
+                    style={{ backgroundColor: "transparent", borderWidth: 0 }}
+                    value={checked} 
+                    onValueChange={unchecked}
+                    />
+                 <Text style={{fontSize:12}}>I'm okay with Term of Services</Text>   
+              </View>  
               <Button 
                   raised title='Sign Up' 
                   type='clear' 
